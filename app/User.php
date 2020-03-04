@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Model\Personne;
 use App\Model\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -42,4 +43,10 @@ class User extends Authenticatable
     function role() {
         return $this->hasMany(Role::class);
     }
+
+
+    public function personne() {
+        return $this->hasOne(Personne::class);
+    }
+
 }

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller {
@@ -16,36 +15,54 @@ class AuthController extends Controller {
         $validator = Validator::make($request->all(),
             [
                 'name' => 'required',
-                'email' => 'required|email',
+                'email' => 'required|email|unique:users',
                 'password' => 'required',
-                'c_password' => 'required|same:password',
             ]);
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401);
+            return jsend_fail([
+                "title" => "Registration failed",
+                "body" => $validator->errors()
+            ], 401);
         }
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token'] = $user->createToken('AppName')->accessToken;
-        return response()->json(['success' => $success], $this->successStatus);
+        $user->role()->save(factory(Role::class)->make(['user_id' => $user->id, 'role' => 'joueur']));
+        $success['token'] = $user->createToken('Taches-api', [$this->scope])->accessToken;
+        return jsend_success($success);
     }
-
 
     public function login() {
         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
             $user = Auth::user();
-            $this->scope = 'admin';
-            Log::info(sprintf("Dans Login : %s", $this->scope));
-
-            $success['token'] = $user->createToken('AppName', [$this->scope])->accessToken;
-            return response()->json(['success' => $success], $this->successStatus);
+            $userRole = $user->role()->first();
+            if ($userRole) {
+                $this->scope = $userRole->role;
+            }
+            $success['token'] = $user->createToken('Taches-api', [$this->scope])->accessToken;
+            return jsend_success($success);
         } else {
-            return response()->json(['error' => 'Unauthorised'], 401);
+            return jsend_fail([
+                "title" => "Unauthorised",
+                "body" => "Nom d'utilisateur et/ou mot de passe incorrect"
+            ], 401);
         }
+    }
+
+    public function logout(Request $request) {
+        if (Auth::check()) {
+            $token = Auth::user()->token();
+            $token->revoke();
+            return jsend_success(['successfully logout'], 201);
+        }
+        return jsend_fail([
+            "title" => "Unauthorised",
+            "body" => "Token invalid"
+        ], 401);
     }
 
     public function getUser() {
         $user = Auth::user();
-        return response()->json(['success' => $user], $this->successStatus);
+        return jsend_success(["user" => $user], 200);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Model\Role;
 use App\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -11,41 +12,42 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller {
     function index() {
-        Log::info("dans UserController method index");
-        return User::all();
+        return jsend_success(User::all());
     }
 
     function create(Request $request) {
-        Log::info(sprintf("dans la requete create user" ));
         $validator = Validator::make($request->all(),[
             'name' => 'required',
             'email' => 'required|unique:users',
             'password' => 'required|min:4'
         ]);
         if ($validator->fails()) {
-            return response()->json($errors = $validator->errors(), 403);
+            return jsend_fail([
+                "title" => "Creation failed",
+                "body" => $validator->errors()
+            ], 422);
         }
-        return User::create($request->all());
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
+        $user = User::create($input);
+        $user->role()->save(factory(Role::class)->make(['user_id' => $user->id, 'role' => 'joueur']));
 
+        return jsend_success($user);
     }
 
     function update(Request $request, $id) {
-        Log::info(sprintf("dans la requete modif user %s", $id ));
         try {
             $user = User::findOrFail($id);
-            Log::info(sprintf("dans la requete modif user de nom %s", $user->email ));
         } catch (ModelNotFoundException $e) {
-            return response()->json([
-                'message' => 'User not found.'
-            ], 403);
+            return jsend_fail([
+                "title" => "User not found.",
+            ], 422);
         }
-        Log::info(sprintf("dans la requete modif name ancien nom : %s, nouveau nom :  %s", $user->name, $request->get('name') ));
 
         $user->name = $request->get('name', $user->name);
         $user->save();
 
-        return response()->json(['message'=>'User updated successfully.']);
-
+        return jsend_success(['user'=>$user], 200);
     }
 
     function show($id) {
@@ -53,26 +55,25 @@ class UserController extends Controller {
             $user = User::findOrFail($id);
             Log::info(sprintf("dans la requete modif user de nom %s", $user->email ));
         } catch (ModelNotFoundException $e) {
-            return response()->json([
-                'message' => 'User not found.'
-            ], 403);
+            return jsend_fail([
+                "title" => "User not found.",
+            ], 422);
         }
 
-        return $user;
+        return jsend_success(['message'=>'User updated successfully.','user'=>$user], 200);
+
 
     }
+
     function delete($id) {
         try {
             $user = User::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            return response()->json([
-                'message' => 'User not found.'
-            ], 403);
+            return jsend_fail([
+                "title" => "User not found.",
+            ], 422);
         }
-
         $user->delete();
-
-        return response()->json(['message'=>'User deleted successfully.']);
-
+        return jsend_success(['message'=>'User deleted successfully.'], 204);
     }
 }

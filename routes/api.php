@@ -19,26 +19,35 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('v1')->group(function () {
+Route::prefix('v2')->group(function () {
     Route::post('login', 'Api\AuthController@login');
     Route::post('register', 'Api\AuthController@register');
-    Route::group(['middleware' => 'auth:api'], function () {
-        Route::get('getUser', 'Api\AuthController@getUser');
-    });
 });
 
 Route::prefix('v2')->middleware(['auth:api', 'role'])->group(function() {
 
-    Route::middleware(['scope:admin,moderator,basic'])->get('/user/{id}', 'Api\UserController@show');
 
     // List users
-    Route::middleware(['scope:admin,moderator,basic'])->get('/users', 'Api\UserController@index');
+    Route::middleware(['scope:admin'])->get('/users', 'Api\UserController@index');
+    Route::middleware(['scope:admin'])->get('/user/{id}', 'Api\UserController@show');
+    Route::middleware(['scope:admin,auteur,joueur'])->get('personnes', 'Api\PersonneController@index');
+    Route::middleware(['scope:admin,auteur'])->get('personnes/{id}', 'Api\PersonneController@show');
+    Route::get('getPersonne', 'Api\PersonneController@getPersonne');
 
     // Add/Edit User
-    Route::middleware(['scope:admin,moderator'])->post('/user', 'Api\UserController@create');
-
-    Route::middleware(['scope:admin,moderator'])->put('/user/{userId}', 'Api\UserController@update');
+    Route::middleware(['scope:admin,auteur'])->post('/user', 'Api\UserController@create');
+    Route::middleware(['scope:admin,auteur'])->put('/user/{userId}', 'Api\UserController@update');
+    Route::middleware(['scope:admin,auteur'])->put('personnes/{id}', 'Api\PersonneController@update');
+    Route::middleware(['scope:admin,auteur'])->put('personnes', 'Api\PersonneController@update');
 
     // Delete User
     Route::middleware(['scope:admin'])->delete('/user/{userId}', 'Api\UserController@delete');
+    Route::middleware(['scope:admin'])->delete('personnes/{id}', 'Api\PersonneController@destroy');
+
+    Route::post('logout', 'Api\AuthController@logout');
+
+    Route::get('getUser', 'Api\AuthController@getUser');
+
+
+
 });
