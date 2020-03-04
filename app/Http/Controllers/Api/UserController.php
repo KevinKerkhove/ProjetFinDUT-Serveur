@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Model\Role;
 use App\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -12,7 +13,9 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller {
     function index() {
-        return jsend_success(User::all());
+        $users = User::all();
+        collect($users)->map(function ($user) {return new UserResource($user);});
+        return jsend_success(collect($users)->map(function ($user) {return new UserResource($user);}));
     }
 
     function create(Request $request) {
