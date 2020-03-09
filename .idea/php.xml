@@ -107,6 +107,8 @@
       <path value="$PROJECT_DIR$/vendor/orchestra/testbench-core" />
       <path value="$PROJECT_DIR$/vendor/orchestra/testbench" />
       <path value="$PROJECT_DIR$/vendor/shalvah/laravel-jsend" />
+      <path value="$PROJECT_DIR$/vendor/fruitcake/laravel-cors" />
+      <path value="$PROJECT_DIR$/vendor/asm89/stack-cors" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

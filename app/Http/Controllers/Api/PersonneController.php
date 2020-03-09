@@ -35,7 +35,7 @@ class PersonneController extends Controller {
     public function index() {
         $personnes = Personne::all();
         $data = PersonneResource::collection($personnes);
-        return jsend_success(["data" => $data]);
+        return jsend_success($data);
     }
 
     /**
@@ -127,7 +127,7 @@ class PersonneController extends Controller {
         $personne->save();
         $user->save();
         $data = new PersonneResource($personne);
-        return jsend_success(["data" => $data]);
+        return jsend_success($data);
     }
 
     public function show($id) {
@@ -139,7 +139,7 @@ class PersonneController extends Controller {
             ], 422);
         }
         $data = new PersonneResource($personne);
-        return jsend_success(["data" => $data]);
+        return jsend_success( $data);
     }
 
     public function destroy($id) {
