@@ -3,24 +3,20 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Model;
-use App\Model\Tache;
+use App\Model\Personne;
 use Faker\Generator as Faker;
 
-$factory->define(Tache::class, function (Faker $faker) {
+$factory->define(Personne::class, function (Faker $faker) {
     $createAt = $faker->dateTimeInInterval(
         $startDate = '-6 months',
         $interval = '+ 180 days',
         $timezone = date_default_timezone_get()
     );
     return [
-        'expiration' => $faker->dateTimeInInterval(
-            $startDate = '-6 months',
-            $interval = '+ 180 days',
-            $timezone = date_default_timezone_get()
-        ),
-        'categorie' => $faker->randomElement($array = array('Urgent', 'A Faire', 'Optionnel')),
-        'description' => $faker->paragraph,
-        'accomplie' => $faker->randomElement($array = array('O', 'N')),
+        'nom' => $faker->lastName(),
+        'prenom' => $faker->firstName(),
+        'specialite' => $faker->randomElement(['Polyvalent','Charpentier', 'Chauffagiste', 'Couvreur', 'Electricien', 'Grutier', 'Maçon', 'Plaquiste', 'Plombier']),
+        'cv' => $faker->paragraph(),
         'created_at' => $createAt,
         'updated_at' => $faker->dateTimeInInterval(
             $startDate = $createAt,

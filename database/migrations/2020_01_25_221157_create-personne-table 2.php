@@ -15,12 +15,12 @@ class CreatePersonneTable extends Migration {
             $table->bigIncrements('id');
             $table->string('nom', 50)->nullable(false);
             $table->string('prenom', 50)->nullable(false);
-            $table->integer('age')->nullable(false);
+            $table->string('specialite', 70)->default('Polyvalent')->nullable(false);
             $table->boolean('actif')->default(true)->nullable(false);
-            $table->string('avatar')->nullable(true);
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
+            $table->text('cv')->nullable(true);
+            $table->string('avatar')->nullable(true);
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreatePersonneTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('personnes');
+        Schema::dropIfExists('PersonneResource');
     }
 }

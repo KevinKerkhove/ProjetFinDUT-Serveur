@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Model;
+namespace App\Modeles;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tache extends Model {
+class Jeu extends Model {
     function suivis() {
         return $this->hasMany(Suivi::class);
     }

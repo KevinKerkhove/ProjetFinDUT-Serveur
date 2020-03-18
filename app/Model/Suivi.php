@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Model;
+namespace App\Modeles;
 
-use App\Models\Tache;
 use Illuminate\Database\Eloquent\Model;
 
 class Suivi extends Model
 {
-    function tache() {
-        return $this->belongsTo(Tache::class);
+    function jeu() {
+        return $this->belongsTo(Jeu::class);
     }
     function personne() {
         return $this->belongsTo(Personne::class);
-    }}
+    }
+}

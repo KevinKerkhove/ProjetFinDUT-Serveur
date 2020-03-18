@@ -13,11 +13,11 @@ class CreateSuiviTable extends Migration {
     public function up() {
         Schema::create('suivis', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('temps_jeu');
-            $table->string('score', 70)->nullable(false);
-            $table->bigInteger('jeu_id')->unsigned()->nullable(true);
-            $table->foreign('jeu_id')->references('id')->on('jeus');
-            $table->bigInteger('personne_id')->unsigned()->nullable(true);
+            $table->string('titre', 70)->nullable(false);
+            $table->text('commentaire');
+            $table->bigInteger('tache_id')->unsigned();
+            $table->foreign('tache_id')->references('id')->on('taches');
+            $table->bigInteger('personne_id')->unsigned();
             $table->foreign('personne_id')->references('id')->on('personnes');
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ class CreateSuiviTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('suivis');
+        Schema::dropIfExists('Suivi');
     }
 }

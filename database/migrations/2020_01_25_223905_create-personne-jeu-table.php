@@ -4,18 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePersonneTacheTable extends Migration {
+class CreatePersonneJeuTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('personne_tache', function (Blueprint $table) {
+        Schema::create('personne_jeu', function (Blueprint $table) {
             $table->bigInteger('personne_id')->unsigned();
-            $table->bigInteger('tache_id')->unsigned();
+            $table->bigInteger('jeu_id')->unsigned();
             $table->foreign('personne_id')->references('id')->on('personnes')->onDelete('cascade');
-            $table->foreign('tache_id')->references('id')->on('taches')->onDelete('cascade');
+            $table->foreign('jeu_id')->references('id')->on('jeus')->onDelete('cascade');
         });
     }
 
@@ -25,6 +25,6 @@ class CreatePersonneTacheTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('personnes_suivis');
+        Schema::dropIfExists('personne_jeu');
     }
 }

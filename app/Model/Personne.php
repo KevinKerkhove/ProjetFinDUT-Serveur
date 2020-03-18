@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Model;
+namespace App\Modeles;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Personne extends Model {
-    function taches() {
-        return $this->belongsToMany(Tache::class);
+    function jeux() {
+        return $this->belongsToMany(Jeu::class);
     }
 
     function user() {
