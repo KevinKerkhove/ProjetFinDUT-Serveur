@@ -19,13 +19,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('v2')->group(function () {
-    Route::post('login', 'Api\AuthController@login');
-    Route::post('register', 'Api\AuthController@register');
-});
 
-Route::prefix('v2')->middleware(['auth:api', 'role'])->group(function() {
+Route::post('login', 'Api\AuthController@login');
+Route::post('register', 'Api\AuthController@register');
 
+Route::middleware(['auth:api', 'role'])->group(function() {
 
     // List users
     Route::middleware(['scope:admin'])->get('/users', 'Api\UserController@index');
@@ -47,7 +45,5 @@ Route::prefix('v2')->middleware(['auth:api', 'role'])->group(function() {
     Route::post('logout', 'Api\AuthController@logout');
 
     Route::get('getUser', 'Api\AuthController@getUser');
-
-
 
 });

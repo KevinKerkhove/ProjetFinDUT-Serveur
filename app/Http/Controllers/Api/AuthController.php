@@ -42,9 +42,8 @@ class AuthController extends Controller {
             $personne = factory(Personne::class)->create([
                 'nom' => $request->nom,
                 'prenom' => $request->prenom,
+                'age' => $request->age,
                 'actif' => $request->get('actif', true),
-                'cv' => $request->get('cv', 'to complete'),
-                'specialite' => $request->get('specialite', 'Polyvalent'),
                 'avatar' => 'avatars/anonymous.png',
                 'user_id' => $user->id,
             ]);
@@ -55,7 +54,7 @@ class AuthController extends Controller {
                 $personne->save();
             }
             $this->success['personne'] = new PersonneResource($user->personne);
-            $this->success['token'] = $user->createToken('Taches-api', [$user->role()->first()->role])->accessToken;
+            $this->success['token'] = $user->createToken('Games-api', [$user->role()->first()->role])->accessToken;
         });
         } catch (Exception $e) {
             return jsend_error($e->getMessage(), $e->getCode());
@@ -71,7 +70,7 @@ class AuthController extends Controller {
                 $this->scope = $userRole->role;
             }
             $success['personne'] = new PersonneResource($user->personne);
-            $success['token'] = $user->createToken('Taches-api', [$this->scope])->accessToken;
+            $success['token'] = $user->createToken('Games-api', [$this->scope])->accessToken;
             return jsend_success($success);
         } else {
             return jsend_fail([

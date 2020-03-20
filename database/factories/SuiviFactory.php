@@ -2,8 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
-use App\Modeles\Suivi;
+use App\Model\Suivi;
 use Faker\Generator as Faker;
 
 $factory->define(Suivi::class, function (Faker $faker) {
@@ -13,7 +12,7 @@ $factory->define(Suivi::class, function (Faker $faker) {
         $timezone = date_default_timezone_get()
     );
     return [
-        'temps_jeu' => $faker->date(),
+        'temps_jeu' => $faker->time(),
         'score' => $faker->randomNumber(),
         'created_at' => $createAt,
         'updated_at' => $faker->dateTimeInInterval(

@@ -21,9 +21,8 @@ class PersonneResource extends JsonResource {
             'id' => $this->id,
             'nom' => $this->nom,
             'prenom' => $this->prenom,
-            'specialite' => $this->specialite,
+            'age' => $this->age,
             'actif' => $this->actif,
-            'cv' => $this->cv,
             'avatar'  => url(Storage::url($path)),
             'user' => new UserResource($this->user),
         ];

@@ -2,7 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Modeles\Jeu;
+
+use App\Model\Jeu;
 use Faker\Generator as Faker;
 
 $factory->define(Jeu::class, function (Faker $faker) {
@@ -13,7 +14,7 @@ $factory->define(Jeu::class, function (Faker $faker) {
     );
     return [
         'description' => $faker->paragraph,
-        'categorie' => $faker->randomElement($array = array('Histoire', 'Multi', 'Arcade')),
+        'categorie' => $faker->randomElement($array = array('Platform', 'Arcade', 'Fight')),
         'fini' => $faker->randomElement($array = array('O', 'N')),
         'name' => $faker->word,
         'created_at' => $createAt,

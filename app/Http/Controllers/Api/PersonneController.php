@@ -55,9 +55,8 @@ class PersonneController extends Controller {
                 $personne = factory(Personne::class)->create([
                     'nom' => $request->nom,
                     'prenom' => $request->prenom,
+                    'age' => $request->age,
                     'actif' => $request->get('actif', true),
-                    'cv' => $request->get('cv', 'to complete'),
-                    'specialite' => $request->get('specialite', 'Polyvalent'),
                     'avatar' => 'avatars/anonymous.png',
                     'user_id' => $user->id,
                 ]);
@@ -107,16 +106,11 @@ class PersonneController extends Controller {
         }
         $personne->nom = $request->get('nom');
         $personne->prenom = $request->get('prenom');
+        $personne->age = $request->get('age');
         $user->name = $request->prenom . ' ' . $request->nom;
         $user->email = $request->get('email');
         if ($request->has('password'))
             $user->password = bcrypt($request->get('password'));
-        if ($request->has('cv')) {
-            $personne->cv = $request->get('cv');
-        }
-        if ($request->has('specialite')) {
-            $personne->specialite = $request->get('specialite');
-        }
         if ($request->has('actif')) {
             if ($request->get('actif'))
                 $personne->actif = 1;

@@ -13,7 +13,7 @@ class CreateSuiviTable extends Migration {
     public function up() {
         Schema::create('suivis', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('temps_jeu');
+            $table->time('temps_jeu');
             $table->string('score', 70)->nullable(false);
             $table->bigInteger('jeu_id')->unsigned()->nullable(true);
             $table->foreign('jeu_id')->references('id')->on('jeus');
