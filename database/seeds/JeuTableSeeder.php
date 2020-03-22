@@ -1,6 +1,6 @@
 <?php
 
-use App\Modeles\Jeu;
+use App\Model\Jeu;
 use Illuminate\Database\Seeder;
 
 class JeuTableSeeder extends Seeder {
@@ -10,6 +10,6 @@ class JeuTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        factory(Jeu::class, 10)->create();
+        factory(Jeu::class, 20)->create();
     }
 }
