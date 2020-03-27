@@ -1,43 +1,44 @@
 <p align="center"><img src="http://www.iut-lens.univ-artois.fr/wp-content/themes/iutlens2016new2/images/screenshot.png" width="100"></p>
 
 
-## Présentation de ce projet
+## Présentation de ce projet : GOKU PATH
 
-Version API de l'application taches que nous avons utilisé pendant les séances de TP du module Pweb-1.
+Partie serveur de notre projet contenant les informations des utilisateurs.
 
 ## Rappels sur le système d'information utilisé
 
-*   Une tâche est caractérisée par 
+*   Un jeu est caractérisé par 
 
-    -   Une date d'expiration
+    -   Un nom
     -   Une catégorie
     -   Une description
-    -   Un boolean accomplie
+    -   Un boolean pour savoir si il est fini
 
 *   Une personne est caractérisée par 
 
     -   Un nom
     -   Un prénom
-    -   Une spécialité
+    -   Un age
     -   Un avatar
-    -   Un CV
     -   un booléen qui indique si la personne est active ou non
 
 *   Un suivi d'activité est caractérisé par 
 
-    -   Un titre
-    -   Un commentaire
+    -   Le temps de jeu
+    -   Le score
+
+*   Un Rôle est caractérisé par 
+
+    -   Le role de l'utilisateur (admin, joueur, auteur)
 
 *   Un `User` est la classe proposée par `Laravel` pour mettre en oeuvre l'identification.
 
 * Quelques explications sur les relations entre classes :
 
-    -   Une tâche est accomplie par plusieurs personnes.
-    -   Un suivi d'exécution est associé à une tâche et une tâche peut faire l'objet de plusieurs suivis d'exécution
+    -   Une jeu est utilisé par les personnes.
+    -   Un suivi d'exécution est associé à un jeu et un jeu peut faire l'objet de plusieurs suivis d'exécution
     -   Une personne peut se connecté si un enregistrement dans la table user est associé avec la personne
     -   Un suivi d'exécution est créé par une personne
-
-![Le modèle de données](docs/images/modele.png)
 
 ### La création du système d'information
 
@@ -592,5 +593,4 @@ Pour configurer notre application Laravel, nous allons suivre le tutoriel [Build
 
     
 ---
-[modele]: docs/images/modele.png  "Figure 1. Le modèle de données" {#modele  .centre height="300px" }
 
