@@ -38,7 +38,7 @@ class AuthController extends Controller {
             $input = $request->all();
             $input['password'] = bcrypt($input['password']);
             $user = User::create($input);
-            $user->role()->save(factory(Role::class)->make(['user_id' => $user->id, 'role' => 'admin']));
+            $user->role()->save(factory(Role::class)->make(['user_id' => $user->id, 'role' => 'joueur']));
             $personne = factory(Personne::class)->create([
                 'nom' => $request->nom,
                 'prenom' => $request->prenom,

@@ -62,10 +62,7 @@ class UserController extends Controller {
                 "title" => "User not found.",
             ], 422);
         }
-
         return jsend_success(['message'=>'User updated successfully.','user'=>$user], 200);
-
-
     }
 
     function delete($id) {

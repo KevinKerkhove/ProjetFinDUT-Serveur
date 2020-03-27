@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         Passport::tokensCan([
             'admin' => 'Add/Edit/Delete Users',
             'auteur' => 'Add/Edit Users',
-            'joueur' => 'List Users'
+            'joueur' => 'Add/ Users'
         ]);
 
         Passport::setDefaultScope([

@@ -24,6 +24,6 @@ class UsersTableSeeder extends Seeder {
             'remember_token' => Str::random(10),
         ]);
 
-        $user->role()->save(factory(Role::class)->make(['user_id' => $user->id, 'role' => 'admin']));
+        $user->role()->save(factory(Role::class)->make(['user_id' => $user->id, 'role' => 'joueur']));
     }
 }
