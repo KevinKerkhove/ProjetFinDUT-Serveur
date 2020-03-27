@@ -10,6 +10,6 @@ class JeuTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        factory(Jeu::class, 20)->create();
+        /*factory(Jeu::class, 20)->create();*/
     }
 }

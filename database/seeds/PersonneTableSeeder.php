@@ -12,7 +12,7 @@ class PersonneTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        $faker = Faker\Factory::create('fr_FR');
+/*        $faker = Faker\Factory::create('fr_FR');
         $personnes = factory(Personne::class, 10)->make()
             ->each(function ($personne) use ($faker) {
                 $user = factory(User::class)->create([
@@ -25,7 +25,7 @@ class PersonneTableSeeder extends Seeder {
                 $user->role()->save(factory(Role::class)->make());
                 $personne->user_id = $user->id;
                 $personne->save();
-            });
+            });*/
         // Robert Duchmol : joueur
         $user  = factory(User::class)->create([
             'name' => 'Robert Duchmol',

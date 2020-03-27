@@ -11,7 +11,7 @@ class   SuiviTableSeeder extends Seeder {
      * @return void
      */
     public function run(){
-        $jeuxId = Jeu::all('id')->pluck('id')->toArray();
+/*        $jeuxId = Jeu::all('id')->pluck('id')->toArray();
         $faker = Faker\Factory::create('fr_FR');
         factory(Suivi::class, 100)->make()
             ->each(function ($suivi) use ($jeuxId, $faker) {
@@ -20,6 +20,6 @@ class   SuiviTableSeeder extends Seeder {
                 $personnesId = $jeu->personnes->pluck('id')->toArray();
                 $suivi->personne_id = $faker->randomElement($personnesId);
                 $suivi->save();
-            });
+            });*/
     }
 }

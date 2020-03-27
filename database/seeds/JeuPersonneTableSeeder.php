@@ -12,7 +12,7 @@ class JeuPersonneTableSeeder extends \Illuminate\Database\Seeder
      * @return void
      */
     public function run() {
-        $jeux = Jeu::all();
+/*        $jeux = Jeu::all();
         $personnes_id = Personne::all('id')->pluck('id')->toArray();
         $faker = Faker\Factory::create('fr_FR');
 
@@ -22,6 +22,6 @@ class JeuPersonneTableSeeder extends \Illuminate\Database\Seeder
                 ->randomElements($personnes_id, $nbPersonnes);
             $jeu->personnes()->attach($id_personnes);
             $jeu->save();
-        }
+        }*/
     }
 }
