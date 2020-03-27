@@ -39,7 +39,7 @@ class PersonneTableSeeder extends Seeder {
             'nom' => 'Duchmol',
             'prenom' => 'Robert',
             'age' => 31,
-            'actif' => 0,
+            'actif' => 0
         ]);
         $personne->user_id = $user->id;
         $personne->save();
