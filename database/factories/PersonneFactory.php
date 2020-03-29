@@ -16,7 +16,7 @@ $factory->define(Personne::class, function (Faker $faker) {
         'prenom' => $faker->firstName(),
         'age' => $faker->numberBetween(1,100),
         'actif' => $faker->boolean,
-        'avatar' => $faker->imageUrl(),
+        'avatar' => null,
         'created_at' => $createAt,
         'updated_at' => $faker->dateTimeInInterval(
             $startDate = $createAt,

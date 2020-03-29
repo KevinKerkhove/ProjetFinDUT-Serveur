@@ -57,7 +57,7 @@ class PersonneTableSeeder extends Seeder {
             'prenom' => 'Etienne',
             'age' => 20,
             'actif' => 1,
-            'avatar' => 'avatars/etienne_avatar.jpeg',
+            'avatar' => 'avatars/avatar_goku.png'
         ]);
         $personne->user_id = $user->id;
         $personne->save();
