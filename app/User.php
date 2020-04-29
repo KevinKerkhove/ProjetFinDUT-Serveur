@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Model\Absence;
+use App\Model\Creneau;
+use App\Model\Groupe;
 use App\Model\Personne;
 use App\Model\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -40,13 +43,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    function role() {
-        return $this->hasMany(Role::class);
+    function absence() {
+        return $this->hasMany(Absence::class);
     }
 
 
-    public function personne() {
-        return $this->hasOne(Personne::class);
+    public function creneau() {
+        return $this->hasMany(Creneau::class);
+    }
+
+    public function groupe() {
+        return $this->belongsTo(Groupe::class);
     }
 
 }
