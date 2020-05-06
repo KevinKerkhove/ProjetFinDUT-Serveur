@@ -16,7 +16,7 @@ class CreateAbsencesTable extends Migration
         Schema::create('absences', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('motif', 50)->nullable(false);
-            $table->boolean('jusifiee');
+            $table->boolean('justifiee');
             $table->bigInteger('idEtudiant')->nullable(false);
             $table->foreign('idEtudiant')->references('id')->on('users')->onDelete('cascade');
             $table->bigInteger('idDocument')->nullable();

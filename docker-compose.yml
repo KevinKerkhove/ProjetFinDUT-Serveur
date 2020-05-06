@@ -45,7 +45,7 @@ services:
       - ./.docker/mysql/my.cnf:/etc/mysql/my.cnf
       - dbdata:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: games_api
+      MYSQL_DATABASE: absences_api
       MYSQL_ROOT_PASSWORD: secret
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
