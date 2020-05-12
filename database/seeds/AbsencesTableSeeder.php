@@ -18,7 +18,7 @@ class AbsencesTableSeeder extends Seeder {
         $absence = factory(Absence::class)->create([
             'motif' => 'RDV MEDICAL',
             'justifiee' => false,
-            'document' => null,
+            'document' => 'null',
             'idEtudiant' => 1,
             'idCreneau' => 1,
         ]);

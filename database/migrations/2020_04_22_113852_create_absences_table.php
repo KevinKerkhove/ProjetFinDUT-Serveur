@@ -18,9 +18,9 @@ class CreateAbsencesTable extends Migration
             $table->text('motif');
             $table->boolean('justifiee');
             $table->string('document')->nullable(true);
-            $table->bigInteger('idEtudiant')->unsigned();
+            $table->unsignedBigInteger('idEtudiant');
             $table->foreign('idEtudiant')->references('id')->on('users')->onDelete('cascade');
-            $table->bigInteger('idCreneau')->unsigned();
+            $table->unsignedBigInteger('idCreneau');
             $table->foreign('idCreneau')->references('id')->on('creneaux')->onDelete('cascade');
             $table->timestamps();
         });
