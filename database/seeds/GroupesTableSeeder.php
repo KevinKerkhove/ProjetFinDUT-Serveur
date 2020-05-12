@@ -6,6 +6,6 @@ use \App\Model\Groupe;
 class GroupesTableSeeder extends Seeder {
 
     public function run(){
-        factory(Groupe::class, 20)->create();
+        factory(Groupe::class, 5)->create();
     }
 }

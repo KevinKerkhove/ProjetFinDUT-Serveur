@@ -15,12 +15,13 @@ class CreateAbsencesTable extends Migration
     {
         Schema::create('absences', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('motif', 50)->nullable(false);
+            $table->text('motif');
             $table->boolean('justifiee');
-            $table->bigInteger('idEtudiant')->nullable(false);
+            $table->string('document')->nullable(true);
+            $table->bigInteger('idEtudiant')->unsigned();
             $table->foreign('idEtudiant')->references('id')->on('users')->onDelete('cascade');
-            $table->bigInteger('idDocument')->nullable();
-            $table->foreign('idDocument')->references('id')->on('documents')->onDelete('cascade');
+            $table->bigInteger('idCreneau')->unsigned();
+            $table->foreign('idCreneau')->references('id')->on('creneaux')->onDelete('cascade');
             $table->timestamps();
         });
     }

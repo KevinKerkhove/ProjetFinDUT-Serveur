@@ -18,8 +18,9 @@ $factory->define(Absence::class, function (Faker $faker) {
     return [
         'motif' => $faker->word,
         'justifiee' => $faker->boolean,
+        'document' => $faker->word,
         'idEtudiant' => random_int(DB::table('users')->min('id'), DB::table('users')->max('id')),
-        'idDocument' => random_int(DB::table('documents')->min('id'), DB::table('documents')->max('id')),
+        'idCreneau' => random_int(DB::table('creneaux')->min('id'), DB::table('creneaux')->max('id')),
         'created_at' => $createAt,
         'updated_at' => $faker->dateTimeInInterval(
             $startDate = $createAt,

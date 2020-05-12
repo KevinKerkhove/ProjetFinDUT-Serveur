@@ -19,10 +19,6 @@ class Creneau extends Model
         return $this->belongsTo(Module::class);
     }
 
-    public function salle() {
-        return $this->belongsTo(Salle::class);
-    }
-
     public function absence() {
         return $this->hasMany(Absence::class);
     }

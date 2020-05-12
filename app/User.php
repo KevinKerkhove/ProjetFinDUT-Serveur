@@ -5,8 +5,6 @@ namespace App;
 use App\Model\Absence;
 use App\Model\Creneau;
 use App\Model\Groupe;
-use App\Model\Personne;
-use App\Model\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -46,7 +44,6 @@ class User extends Authenticatable
     function absence() {
         return $this->hasMany(Absence::class);
     }
-
 
     public function creneau() {
         return $this->hasMany(Creneau::class);

@@ -17,10 +17,11 @@ class CreneausTableSeeder extends Seeder
             });*/
 
         $creneau = factory(Creneau::class)->create([
-            'nom_cours' => 'PWEB',
             'dateDeDebut' => '2020-04-05',
-            'duree' => 1,
-            'idSalle' => 1,
+            'duree' => 90,
+            'salle' => '05SE',
+            'idModule' => 1,
+            'idGroupe' => 2,
             'idEnseignant' => 5,
         ]);
         $creneau->save();
