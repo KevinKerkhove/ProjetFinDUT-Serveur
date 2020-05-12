@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PersonneResource;
-use App\Model\Personne;
-use App\Model\Role;
+use App\Http\Resources\UserResource;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -69,8 +67,8 @@ class AuthController extends Controller {
             if ($userRole) {
                 $this->scope = $userRole->role;
             }
-            $success['personne'] = new PersonneResource($user->personne);
-            $success['token'] = $user->createToken('Games-api', [$this->scope])->accessToken;
+            $success['personne'] = new UserResource($user->personne);
+            $success['token'] = $user->createToken('Absences-api', [$this->scope])->accessToken;
             return jsend_success($success);
         } else {
             return jsend_fail([

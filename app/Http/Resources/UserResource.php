@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class UserResource extends JsonResource {
     /**
@@ -12,13 +13,19 @@ class UserResource extends JsonResource {
      * @return array
      */
     public function toArray($request) {
+        if ($this->avatar == null)
+            $path = 'avatars/anonymous.png';
+        else
+            $path = $this->avatar;
         return [
             'id' => $this->id,
-            'name' => $this->name,
+            'nom' => $this->nom,
+            'prenom' => $this->prenom,
+            'dateDeNaiss' => $this->dateDeNaiss,
             'email' => $this->email,
-            'role' => $this->role->map(function ($role) {
-                return $role->role;
-            })->all(),
-        ];
+            'avatar'  => url(Storage::url($path)),
+            'grade' => $this->grade,
+            'role' => $this->role,
+            ];
     }
 }
