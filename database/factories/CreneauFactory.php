@@ -16,10 +16,11 @@ $factory->define(Creneau::class, function (Faker $faker) {
         $timezone = date_default_timezone_get()
     );
     return [
-        'nom_cours' => $faker->word,
         'dateDeDebut' => $faker->dateTimeBetween('-1 years', '+1 years'),
-        'duree' => $faker->time('H:i:s'),
-        'idSalle' => random_int(DB::table('salles')->min('id'), DB::table('salles')->max('id')),
+        'duree' => $faker->numberBetween(60, 90),
+        'salle' => $faker->word,
+        'idModule' => random_int(DB::table('modules')->min('id'), DB::table('modules')->max('id')),
+        'idGroupe' => random_int(DB::table('groupes')->min('id'), DB::table('groupes')->max('id')),
         'idEnseignant' => random_int(DB::table('users')->min('id'), DB::table('users')->max('id')),
         'created_at' => $createAt,
         'updated_at' => $faker->dateTimeInInterval(

@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration {
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('avatar')->nullable(true);
-            $table->boolean('grade');
+            $table->boolean('grade')->default(false);
             $table->enum('role', ['etudiant', 'administrateur', 'secretariat', 'enseignant']);
             $table->string('password');
             $table->rememberToken();

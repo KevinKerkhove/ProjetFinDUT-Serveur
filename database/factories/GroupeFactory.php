@@ -15,8 +15,8 @@ $factory->define(Groupe::class, function (Faker $faker) {
         $timezone = date_default_timezone_get()
     );
     return [
-        'nom_court' => $faker->word,
-        'nom_long' => $faker->word,
+        'nom' => $faker->word,
+        'promo' => $faker->word,
         'created_at' => $createAt,
         'updated_at' => $faker->dateTimeInInterval(
             $startDate = $createAt,

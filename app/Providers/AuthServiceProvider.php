@@ -30,13 +30,14 @@ class AuthServiceProvider extends ServiceProvider
 
         // Mandatory to define Scope
         Passport::tokensCan([
-            'admin' => 'Add/Edit/Delete Users',
-            'auteur' => 'Add/Edit Users',
-            'joueur' => 'Add/ Users'
+            'administrateur' => 'Add/Edit/Delete Users',
+            'secretariat' => 'Add/Edit Users',
+            'etudiant' => 'Add/ Users',
+            'enseignant' => 'Add/ Users'
         ]);
 
         Passport::setDefaultScope([
-            'joueur'
+            'etudiant'
         ]);
     }
 }

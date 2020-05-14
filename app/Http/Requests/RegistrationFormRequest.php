@@ -23,6 +23,7 @@ class RegistrationFormRequest extends FormRequest {
         return [
             'nom' => 'required|string',
             'prenom' => 'required|string',
+            'dateDeNaiss' => 'required|date',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6|max:10'
         ];

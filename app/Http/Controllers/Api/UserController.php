@@ -20,7 +20,9 @@ class UserController extends Controller {
 
     function create(Request $request) {
         $validator = Validator::make($request->all(),[
-            'name' => 'required',
+            'nom' => 'required',
+            'prenom' => 'required',
+            'dateDeNaiss' => 'required',
             'email' => 'required|unique:users',
             'password' => 'required|min:4'
         ]);
@@ -47,7 +49,7 @@ class UserController extends Controller {
             ], 422);
         }
 
-        $user->name = $request->get('name', $user->name);
+        $user->nom = $request->get('nom', $user->nom);
         $user->save();
 
         return jsend_success(['user'=>$user], 200);

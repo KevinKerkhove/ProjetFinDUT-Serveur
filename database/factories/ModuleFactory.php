@@ -15,8 +15,8 @@ $factory->define(Module::class, function (Faker $faker) {
         $timezone = date_default_timezone_get()
     );
     return [
-        'nom_court' => $faker->word,
-        'nom_long' => $faker->word,
+        'nom' => $faker->word,
+        'nbHeuresTotal' => $faker->numberBetween(30, 45),
         'created_at' => $createAt,
         'updated_at' => $faker->dateTimeInInterval(
             $startDate = $createAt,

@@ -16,66 +16,11 @@ class AuthController extends Controller {
 
 
     public function register(Request $request) {
-        $validator = Validator::make($request->all(),
-            [
-                'nom' => 'required',
-                'prenom' => 'required',
-                'name' => 'required',
-                'email' => 'required|email|unique:users',
-                'password' => 'required',
-            ]);
-        if ($validator->fails()) {
-            return jsend_fail([
-                "title" => "Registration failed",
-                "body" => $validator->errors()
-            ], 422);
-        }
-        $this->success = [];
-        try {
-            DB::transaction(function () use ($request){
-            $input = $request->all();
-            $input['password'] = bcrypt($input['password']);
-            $user = User::create($input);
-            $user->role()->save(factory(Role::class)->make(['user_id' => $user->id, 'role' => 'joueur']));
-            $personne = factory(Personne::class)->create([
-                'nom' => $request->nom,
-                'prenom' => $request->prenom,
-                'age' => $request->age,
-                'actif' => $request->get('actif', true),
-                'avatar' => 'avatars/anonymous.png',
-                'user_id' => $user->id,
-            ]);
-            $path = null;
-            if ($request->hasFile('avatar')) {
-                $path = $request->file('avatar')->storeAs('avatars', 'avatar_de_' . $personne->id . '.' . $request->file('avatar')->extension(), 'public');
-                $personne->avatar = $path;
-                $personne->save();
-            }
-            $this->success['personne'] = new PersonneResource($user->personne);
-            $this->success['token'] = $user->createToken('Games-api', [$user->role()->first()->role])->accessToken;
-        });
-        } catch (Exception $e) {
-            return jsend_error($e->getMessage(), $e->getCode());
-        }
-        return jsend_success($this->success);
+
     }
 
     public function login() {
-        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
-            $user = Auth::user();
-            $userRole = $user->role()->first();
-            if ($userRole) {
-                $this->scope = $userRole->role;
-            }
-            $success['personne'] = new UserResource($user->personne);
-            $success['token'] = $user->createToken('Absences-api', [$this->scope])->accessToken;
-            return jsend_success($success);
-        } else {
-            return jsend_fail([
-                "title" => "Unauthorised",
-                "body" => "Nom d'utilisateur et/ou mot de passe incorrect"
-            ], 401);
-        }
+
     }
 
     public function logout(Request $request) {

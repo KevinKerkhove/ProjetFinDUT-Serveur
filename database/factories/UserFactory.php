@@ -22,12 +22,12 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'nom' => $faker->name,
         'prenom' => $faker->name,
-        'dateDeNaiss' => $faker->dateTimeBetween('-50 years', 'now'),
+        'dateDeNaiss' => $faker->dateTimeBetween('-50 years', '-18 years'),
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'avatar' => null,
         'grade' => $faker->boolean,
-        'role' => $faker->randomElements(['etudiant', 'secretariat', 'enseignant', 'administrateur']),
+        'role' => $faker->randomElements(['etudiant', 'administrateur', 'secretariat', 'enseignant']),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
     ];
