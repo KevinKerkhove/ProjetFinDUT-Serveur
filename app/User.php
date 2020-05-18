@@ -5,7 +5,6 @@ namespace App;
 use App\Model\Absence;
 use App\Model\Creneau;
 use App\Model\Groupe;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -20,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'nom', 'prenom', 'dateDeNaiss', 'avatar', 'grade', 'role', 'email', 'password',
     ];
 
     /**
