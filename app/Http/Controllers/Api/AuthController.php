@@ -51,7 +51,7 @@ class AuthController extends Controller {
                     $personne->avatar = $path;
                     $personne->save();
                 }
-                $this->success['personne'] = new UserResource($user->personne);
+                $this->success['personne'] = new UserResource($user);
                 $this->success['token'] = $user->createToken('Absences-api')->accessToken;
             });
         } catch (Exception $e) {
@@ -63,7 +63,7 @@ class AuthController extends Controller {
     public function login() {
         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
             $user = Auth::user();
-            $success['personne'] = new UserResource($user->personne);
+            $success['personne'] = new UserResource($user);
             $success['token'] = $user->createToken('Absences-api', [$this->success])->accessToken;
             return jsend_success($success);
         } else {
