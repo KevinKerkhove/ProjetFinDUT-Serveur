@@ -86,6 +86,8 @@ class AbsenceController extends Controller
         } catch (Exception $e) {
             return jsend_error($e->getMessage(), $e->getCode());
         }
+        $absence->delete();
+
         return jsend_success(['message' => 'Absence deleted successfully.'], 204);
     }
 

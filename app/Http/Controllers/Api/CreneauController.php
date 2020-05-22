@@ -52,6 +52,7 @@ class CreneauController extends Controller
                 "title" => "Creneau not found.",
             ], 422);
         }
+        $creneau->delete();
         return jsend_success(['message' => 'Absence deleted successfully.'], 204);
     }
 

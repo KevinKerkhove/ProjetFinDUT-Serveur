@@ -4,7 +4,7 @@ use \App\Model\Creneau;
 use App\User;
 use Illuminate\Database\Seeder;
 
-class CreneausTableSeeder extends Seeder
+class CreneauxTableSeeder extends Seeder
 {
     public function run() {
         /*$users_ids = User::all('id')->pluck('id')->toArray();
