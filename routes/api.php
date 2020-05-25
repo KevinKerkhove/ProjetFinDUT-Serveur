@@ -22,3 +22,34 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login', 'Api\AuthController@login');
 Route::post('register', 'Api\AuthController@register');
 
+Route::group(['middleware' => 'auth.jwt'], function () {
+    Route::post('logout', 'Api\AuthController@logout');
+    Route::get('me', 'Api\AuthController@me');
+    Route::post('refresh', 'Api\AuthController@refresh');
+
+    Route::get('users', 'Api\UserController@index');
+    Route::get('users/{id}', 'Api\UserController@show');
+    Route::put('users/{id}', 'Api\UserController@update');
+    Route::delete('users/{id}', 'Api\UserController@delete');
+
+    Route::get('absences', 'Api\AbsenceController@index');
+    Route::get('absences/{id}', 'Api\AbsenceController@show');
+    Route::put('absences/{id}', 'Api\AbsenceController@update');
+    Route::delete('absences/{id}', 'Api\AbsenceController@destroy');
+
+    Route::get('creneaux', 'Api\CreneauController@index');
+    Route::get('creneaux/{id}', 'Api\CreneauController@show');
+    Route::put('creneaux/{id}', 'Api\CreneauController@update');
+    Route::delete('creneaux/{id}', 'Api\CreneauController@destroy');
+
+    Route::get('groupes', 'Api\GroupeController@index');
+    Route::get('groupes/{id}', 'Api\GroupeController@show');
+    Route::put('groupes/{id}', 'Api\GroupeController@update');
+    Route::delete('groupes/{id}', 'Api\GroupeController@destroy');
+
+    Route::get('modules', 'Api\ModuleController@index');
+    Route::get('modules/{id}', 'Api\ModuleController@show');
+    Route::put('modules/{id}', 'Api\ModuleController@update');
+    Route::delete('modules/{id}', 'Api\ModuleController@destroy');
+});
+
