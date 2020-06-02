@@ -35,7 +35,7 @@ class UserController extends Controller {
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $user->role()->save(factory(Role::class)->make(['user_id' => $user->id, 'role' => 'joueur']));
+        $user->save();
 
         return jsend_success($user);
     }

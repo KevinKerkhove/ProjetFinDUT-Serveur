@@ -37,19 +37,10 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::put('absences/{id}', 'Api\AbsenceController@update');
     Route::delete('absences/{id}', 'Api\AbsenceController@destroy');
 
-    Route::get('creneaux', 'Api\CreneauController@index');
-    Route::get('creneaux/{id}', 'Api\CreneauController@show');
-    Route::put('creneaux/{id}', 'Api\CreneauController@update');
-    Route::delete('creneaux/{id}', 'Api\CreneauController@destroy');
-
     Route::get('groupes', 'Api\GroupeController@index');
     Route::get('groupes/{id}', 'Api\GroupeController@show');
     Route::put('groupes/{id}', 'Api\GroupeController@update');
     Route::delete('groupes/{id}', 'Api\GroupeController@destroy');
 
-    Route::get('modules', 'Api\ModuleController@index');
-    Route::get('modules/{id}', 'Api\ModuleController@show');
-    Route::put('modules/{id}', 'Api\ModuleController@update');
-    Route::delete('modules/{id}', 'Api\ModuleController@destroy');
 });
 

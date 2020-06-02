@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         /*$this->call(GroupesTableSeeder::class);
         $this->call(ModulesTableSeeder::class);
+        $this->call(InGroupTableSeeder::class);
         $this->call(CreneauxTableSeeder::class);
         $this->call(AbsencesTableSeeder::class);*/
     }
